@@ -280,6 +280,45 @@ keys:
                 - int
             enable:
               type: bool
+      objects:
+        type: dict
+        keys:
+          override:
+            type: dict
+            keys:
+              context:
+              type: list
+              primary_key: name
+              items:
+                type: dict
+                keys:
+                  name:
+                    type: str
+                    description: Context Name.
+                    keys:
+                      oid:
+                        type: list
+                        description: |
+                          Enter the OID line here. There are several formatting options and the syntax is as follows.
+                          OID instance to override (fully numeric) followed by one of the following parameters:
+                          - counter         The object is a 32-bit counter
+                          - integer         The object has an integer value
+                          - object-id       The object is an OID
+                          - octet-string    The object is a string
+                          - table-instance  Despite ending in .0, the object is not a scalar
+                          - timeticks       The object has syntax TIMETICKS
+                          - unsigned        The object has unsigned value
+                          Examples:
+                          "oid .2.4.7.2.3.2.2.3.1 object-id .0.2.5.0.3.0.8.0.1000"
+                          "oid .2.2.5.2.3.0.45.0.0.0.0.5.0000100009 integer 1"
+                          "oid .2.2.5.2.3.0.45.0.0.0.0.5.0000100009 octet-string Module1"
+                        items:
+                          type: str
+                  fallback_context_default:
+                    type: bool
+                    description: Enable fallback to the default context.
+
+
       ifmib_ifspeed_shape_rate:
         type: bool
         description: SNMP ifspeed reflecting shaping rate.
